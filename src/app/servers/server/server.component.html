@@ -1,2 +1,9 @@
 <h5>{{ server.name }}</h5>
 <p>Server status is {{ server.status }}</p>
+<!-- <button class="btn-btn-success" (click)='onReload()'>Reload</button> -->
+<!-- cuando indicamos la ruta sin '/' => la ruta se convierte en relativa => direccionHost/.../users -->
+<!-- cuando la indicamos con '/' => la ruta se convierte absoluta => direcionHost/users  -->
+<!-- <button class="btn btn-danger" routerLink='/users'>Ir</button> -->
+
+<button type="button" class="btn btn-warning" (click)='onEdit()'>Editar</button>
+<button type="button" class="btn btn-danger" [routerLink]="['/servers']">Cerrar</button>

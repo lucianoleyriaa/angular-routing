@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -11,13 +12,25 @@ export class EditServerComponent implements OnInit {
   server!: { id: number; name: string; status: string };
   serverName = '';
   serverStatus = '';
+  allowEdit = false;
 
-  constructor(private serversService: ServersService) {}
+  constructor(
+    private serversService: ServersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.server = this.serversService.getServer(1);
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
+
+    // Obteniendo lo query params de la ruta
+    // console.log(this.route.snapshot.queryParams);
+    // console.log(this.route.snapshot.fragment);
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.allowEdit = queryParams.allowEdit === '1' ? true : false;
+    });
   }
 
   onUpdateServer() {
@@ -25,5 +38,10 @@ export class EditServerComponent implements OnInit {
       name: this.serverName,
       status: this.serverStatus,
     });
+  }
+
+  backHome() {
+    // Cuando se ejecuta este metodo router.navigate redirecciona la pagina hacia la ruta que le pasemos entre corchetes
+    this.router.navigate(['']);
   }
 }

@@ -5,11 +5,12 @@
         <li role="presentation" class="nav-item"><a class='nav-link' routerLinkActive='active'
             [routerLinkActiveOptions]='{exact: true}' routerLink='/'>Home</a>
           <!-- el objeto con la propiedad exact le dice a angular que agregue la clase active al link activo que es exactamente el mismo que indica el routerLink (localhost:4200/) -->
+          <!-- routerLink especifica la ruta que debe manejar cada uno de los links -->
         </li>
-        <li role="presentation" class="nav-item"><a class='nav-link' routerLinkActive='active'
-            routerLink='/servers'>Servers</a></li>
-        <li role="presentation" class="nav-item"><a class='nav-link' routerLinkActive='active'
-            routerLink='/users'>Users</a></li>
+        <li role="presentation" class="nav-item"><a class='nav-link' routerLinkActive='active' routerLink='/servers'
+            [routerLinkActiveOptions]='{exact: true}'>Servers</a></li>
+        <li role="presentation" class="nav-item"><a class='nav-link' routerLinkActive='active' routerLink='/users'
+            [routerLinkActiveOptions]='{exact: true}'>Users</a></li>
       </ul>
     </div>
   </div>

@@ -1,4 +1,6 @@
-<h4 *ngIf='!allowEdit'>Your are not allowed to edit this server</h4>
+<div *ngIf='!allowEdit' class="alert alert-danger mt-2">
+  <p class="text-danger">No tienes permisos para editar este servidor!</p>
+</div>
 <div *ngIf='allowEdit'>
   <div class="form-group">
     <label for="name">Server Name</label>

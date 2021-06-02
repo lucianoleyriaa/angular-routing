@@ -21,7 +21,10 @@ export class EditServerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
+    // this.server = this.serversService.getServer(1);
+    this.route.params.subscribe((params: Params) => {
+      this.server = this.serversService.getServer(Number(params.id));
+    });
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
 
@@ -38,6 +41,8 @@ export class EditServerComponent implements OnInit {
       name: this.serverName,
       status: this.serverStatus,
     });
+    // Cuando se ejecuta este metodo router.navigate redirecciona la pagina hacia la ruta que le pasemos entre corchetes
+    this.router.navigate(['/servers', this.server.id]);
   }
 
   backHome() {

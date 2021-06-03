@@ -12,6 +12,8 @@ import { UserComponent } from './users/user/user.component';
 import { ServersService } from './servers/servers.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './auth.service';
+import { Guard } from './guard.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     NotFoundComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
-  providers: [ServersService],
+  providers: [ServersService, AuthService, Guard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

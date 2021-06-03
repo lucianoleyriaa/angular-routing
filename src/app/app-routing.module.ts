@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Guard } from './guard.service';
 
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: 'servers',
     component: ServersComponent,
+    canActivate: [Guard],
     children: [
       // Nested routes
       { path: ':id', component: ServerComponent },

@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Params,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { ServersService } from '../servers.service';
+import { ICanDeactivate } from './can-deactivate.service';
 
 @Component({
   selector: 'app-edit-server',
   templateUrl: './edit-server.component.html',
   styleUrls: ['./edit-server.component.css'],
 })
-export class EditServerComponent implements OnInit {
+// Se implementa la interfaz ICanDeactivate => Obliga a la clase a implementar el metodo canDeactivate()
+export class EditServerComponent implements OnInit, ICanDeactivate {
   server!: { id: number; name: string; status: string };
   serverName = '';
   serverStatus = '';
   allowEdit = false;
+  editSaved = false;
 
   constructor(
     private serversService: ServersService,
@@ -43,10 +53,22 @@ export class EditServerComponent implements OnInit {
     });
     // Cuando se ejecuta este metodo router.navigate redirecciona la pagina hacia la ruta que le pasemos entre corchetes
     this.router.navigate(['/servers', this.server.id]);
+    this.editSaved = true;
   }
 
   backHome() {
     // Cuando se ejecuta este metodo router.navigate redirecciona la pagina hacia la ruta que le pasemos entre corchetes
     this.router.navigate(['']);
+  }
+
+  canDeactivate(): Promise<boolean> | Observable<boolean> | boolean {
+    if (
+      this.serverName === this.server.name &&
+      this.serverStatus === this.server.status
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

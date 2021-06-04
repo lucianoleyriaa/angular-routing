@@ -26,6 +26,7 @@ const routes: Routes = [
   {
     path: 'servers',
     component: ServersComponent,
+    // canActivate => permite incorporar un guard para proteger la ruta '/servers' y sus hijos (children)
     canActivate: [Guard],
     children: [
       // Nested routes

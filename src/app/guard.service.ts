@@ -31,7 +31,10 @@ export class Guard implements CanActivate, CanActivateChild {
     });
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | Observable<boolean> | boolean {
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> | Observable<boolean> | boolean {
     return this.canActivate(route, state);
   }
 }

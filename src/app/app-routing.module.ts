@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Resolver } from './servers/server/resolver-server.service';
 import { Guard } from './guard.service';
 
 import { HomeComponent } from './home/home.component';
@@ -27,13 +28,20 @@ const routes: Routes = [
   {
     path: 'servers',
     component: ServersComponent,
+    // data => permite pasar informacion a la ruta
+    data: { nombre: 'This route is: /servers' },
     // canActivate => permite incorporar un guard para proteger la ruta '/servers' y sus hijos (children)
     // canActivate: [Guard],
     // canActivateChild => protege los hijos de la ruta '/servers'
     canActivateChild: [Guard],
     children: [
       // Nested routes
-      { path: ':id', component: ServerComponent },
+      {
+        path: ':id',
+        component: ServerComponent,
+        // Permite setear el objeto data de forma dinamica
+        resolve: { server: Resolver },
+      },
       {
         path: ':id/edit',
         component: EditServerComponent,
